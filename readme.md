@@ -1,1 +1,1 @@
-<h1>Laravel shopping cart</h1>
+<h1>Laravel shopping cart demo</h1>
