@@ -10,10 +10,10 @@
             <li class="dropdown">
                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User Account</a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="{{ route('register') }}">Sign Up</a></li>
+                    <li><a class="dropdown-item" href="#">Sign In</a></li>
                     <div class="dropdown-divider"></div>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
                 </ul>
             </li>
         </ul>

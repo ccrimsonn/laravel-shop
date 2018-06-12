@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', 'ProductController@getIndex');
+Route::get('/', 'ProductController@getIndex')->name('home');
 
+Route::group(['prefix' => 'signup'], function() {
+    Route::get('/', 'CustomerController@index');
+    Route::post('register', 'CustomerController@store')->name('register');
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

@@ -8,7 +8,7 @@
     @foreach($products->chunk(4) as $productChunk)
         <div class="row">
             @foreach($productChunk as $product)
-                <div class="col-12 col-xl-3">
+                <div class="col-12 col-md-3">
                     <div class="card">
                         <img class="card-img-top" src="{{ $product->imagePatch}}" alt="Card image cap"/>
                         <div class="card-body">
