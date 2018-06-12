@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('shop.index');
-});
+Route::get('/', 'ProductController@getIndex');
 
 
 Route::group(['prefix' => 'admin'], function () {

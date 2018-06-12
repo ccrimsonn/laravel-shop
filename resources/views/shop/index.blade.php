@@ -5,12 +5,24 @@
 @endsection
 
 @section('content')
-    <div class="card py-9" style="width: 18rem;">
-        <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    @foreach($products->chunk(4) as $productChunk)
+        <div class="row">
+            @foreach($productChunk as $product)
+                <div class="col-12 col-xl-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ $product->imagePatch}}" alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->title}}</h5>
+                            <p class="card-text description">{{ $product->description}}</p>
+                            <div class="float-left price">
+                                $ {{ $product->price}}
+                            </div>
+                            <a href="#" class="btn btn-success float-right">Add to Cart</a>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-bottom: 10px;"></div>
+                </div>
+            @endforeach
         </div>
-    </div>
+    @endforeach
 @endsection
