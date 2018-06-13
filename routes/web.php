@@ -11,11 +11,21 @@
 |
 */
 
-Route::get('/', 'ProductController@getIndex')->name('home');
+Route::group(['prefix' => 'products'], function() {
+    Route::get('productHome', 'ProductController@getIndex')->name('productHome');
+    Route::get('add-to-cart/{id}', 'ProductController@addToCart')->name('addToCart');
+    Route::get('shopping-cart', 'ProductController@showCart')->name('shoppingCart');
+});
 
-Route::group(['prefix' => 'signup'], function() {
-    Route::get('/', 'CustomerController@index');
+Route::group(['prefix' => 'user'], function() {
+    Route::get('signup', 'CustomerController@signUpIndex')->name('signUpPage');
     Route::post('register', 'CustomerController@store')->name('register');
+    Route::get('signin', 'CustomerController@signInIndex')->name('signInPage');
+    Route::post('login', 'CustomerController@customerLogin')->name('login');
+    Route::group(['middleware' => ['customerLogin']], function() {
+        Route::get('profile', 'CustomerController@profileIndex')->name('profile');
+        Route::get('logout', 'CustomerController@customerLogout')->name('logout');
+    });
 });
 
 Route::group(['prefix' => 'admin'], function () {

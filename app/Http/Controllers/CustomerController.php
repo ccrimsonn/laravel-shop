@@ -14,9 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('user.signup');
-    }
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -54,7 +53,9 @@ class CustomerController extends Controller
         ]);
         $customer->save();
 
-        return redirect()->route('home');
+        auth()->guard('customer')->login($customer);
+
+        return redirect()->route('productHome');
     }
 
     /**
@@ -100,5 +101,41 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function signUpIndex()
+    {
+        return view('user.signup');
+    }
+
+    public function signInIndex()
+    {
+        return view('user.signin');
+    }
+
+    public function profileIndex()
+    {
+        return view('user.profile');
+    }
+
+    public function customerLogin(Request $request)
+    {
+        $this->validate($request,[
+            'email' => 'email|required',
+            'password' => 'required|min:9'
+        ]);
+        $isCustomer = Customer::where('email', $request['email'])->first();
+        if ($isCustomer != null && password_verify($request['password'], $isCustomer->password))
+        {
+            auth()->guard('customer')->login($isCustomer);
+            return redirect()->route('profile');
+        }
+        return redirect()->back();
+    }
+
+    public function customerLogout()
+    {
+        auth()->guard('customer')->logout();
+        return redirect()->route('productHome');
     }
 }

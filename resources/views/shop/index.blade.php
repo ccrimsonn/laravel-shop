@@ -17,7 +17,7 @@
                             <div class="float-left price">
                                 $ {{ $product->price}}
                             </div>
-                            <a href="#" class="btn btn-success float-right">Add to Cart</a>
+                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="btn btn-success float-right">Add to Cart</a>
                         </div>
                     </div>
                     <div class="clearfix" style="margin-bottom: 10px;"></div>
