@@ -11,4 +11,8 @@ class Customer extends Authenticatable
     protected $table = 'customers';
     protected $fillable = ['email', 'password', 'firstName', 'surname', 'dob', 'gender'];
     protected $hidden = ['password', 'remember_token'];
+
+    public function orders(){
+        return $this->hasMany('App\Order');
+    }
 }
