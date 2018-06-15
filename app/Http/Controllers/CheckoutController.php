@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         $cart = new Cart($oldCart);
 
         $order = new Order();
-        $order->cart = serialize($cart->items);
+        $order->cart = serialize($cart);
         $order->name = $request->input('name');
         $order->address = $request->input('address');
         $order->paymentId = rand();

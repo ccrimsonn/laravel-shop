@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -54,6 +55,12 @@ class CustomerController extends Controller
         $customer->save();
 
         auth()->guard('customer')->login($customer);
+
+        if (Session::has('oldUrl')){
+            $oldUrl = Session::get('oldUrl');
+            Session::forget('oldUrl');
+            return redirect()->to($oldUrl);
+        }
 
         return redirect()->route('productHome');
     }
@@ -115,7 +122,12 @@ class CustomerController extends Controller
 
     public function profileIndex()
     {
-        return view('user.profile');
+        $orders = auth()->guard('customer')->user()->orders;
+        $orders->transform(function ($order, $key){
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        return view('user.profile', ['orders' => $orders]);
     }
 
     public function customerLogin(Request $request)
@@ -128,6 +140,11 @@ class CustomerController extends Controller
         if ($isCustomer != null && password_verify($request['password'], $isCustomer->password))
         {
             auth()->guard('customer')->login($isCustomer);
+            if (Session::has('oldUrl')){
+               $oldUrl = Session::get('oldUrl');
+               Session::forget('oldUrl');
+               return redirect()->to($oldUrl);
+            }
             return redirect()->route('profile');
         }
         return redirect()->back();

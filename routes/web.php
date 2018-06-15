@@ -17,8 +17,10 @@ Route::group(['prefix' => 'products'], function() {
     Route::get('shopping-cart', 'ProductController@showCart')->name('shoppingCart');
 });
 
-Route::get('checkoutPage', 'CheckoutController@checkOutIndex')->name('checkoutPage');
-Route::post('checkout', 'CheckoutController@postCheckOut')->name('checkout');
+Route::group(['middleware' => ['customerLogin']], function(){
+    Route::get('checkoutPage', 'CheckoutController@checkOutIndex')->name('checkoutPage');
+    Route::post('checkout', 'CheckoutController@postCheckOut')->name('checkout');
+});
 
 Route::group(['prefix' => 'user'], function() {
     Route::get('signup', 'CustomerController@signUpIndex')->name('signUpPage');

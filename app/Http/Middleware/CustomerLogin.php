@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class CustomerLogin
 {
@@ -15,10 +16,10 @@ class CustomerLogin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->guard('customer')->user())
-        {
+        if (auth()->guard('customer')->user()) {
             return $next($request);
         }
+        Session::put('oldUrl', $request->url());
         return redirect()->route('signInPage');
     }
 }

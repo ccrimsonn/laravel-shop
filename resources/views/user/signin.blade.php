@@ -23,6 +23,7 @@
                 </div>
                 <button class="btn btn-primary float-right" type="submit">Sign In</button>
             </form>
+            <p> Don't have an account? <a href="{{ route('signUpPage') }}">Sign Up</a></p>
         </div>
     </div>
 @endsection
