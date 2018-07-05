@@ -14,6 +14,8 @@
 Route::group(['prefix' => 'products'], function() {
     Route::get('productHome', 'ProductController@getIndex')->name('productHome');
     Route::get('add-to-cart/{id}', 'ProductController@addToCart')->name('addToCart');
+    Route::get('reduce/{id}', 'ProductController@reduceByOne')->name('reduceByOne');
+    Route::get('remove/{id}', 'ProductController@removeItem')->name('removeItem');
     Route::get('shopping-cart', 'ProductController@showCart')->name('shoppingCart');
 });
 

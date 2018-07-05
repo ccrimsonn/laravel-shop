@@ -20,8 +20,8 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="{{ route('reduceByOne', ['id' => $product['item']['id']]) }}">Reduce by 1</a>
+                                    <a class="dropdown-item" href="{{ route('removeItem', ['id' => $product['item']['id']]) }}">Reduce All</a>
                                 </div>
                             </div>
                         </li>

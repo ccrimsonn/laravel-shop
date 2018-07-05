@@ -16,7 +16,13 @@ class CheckoutController extends Controller
         }else{
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-            $total = $cart->totalPrice;
+
+            if($cart->totalQty == 0){
+                $total = 0;
+            }else{
+                $total = $cart->totalPrice;
+            }
+
             return view('shop/checkOut', ['total' => $total]);
         }
     }
